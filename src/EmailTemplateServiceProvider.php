@@ -20,7 +20,7 @@ class EmailTemplateServiceProvider extends ServiceProvider
         
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
-            $schedule->command('uploads:clear')->everyMinute();
+            $schedule->command('email:send')->everyMinute();
         });
     }
     
