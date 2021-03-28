@@ -5,7 +5,6 @@ namespace Theanh\EmailTemplate\Commands;
 use Theanh\EmailTemplate\Facades\SendEmailService;
 use Theanh\EmailTemplate\Models\EmailList;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 
 class SendMailCommand extends Command
 {

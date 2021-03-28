@@ -16,6 +16,8 @@ class EmailTemplateServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
     
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'emailtemplate');
+        
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('uploads:clear')->everyMinute();

@@ -29,15 +29,11 @@ class SendEmailService
     
         //try {
         
-        if ($mail->data) {
-        
-        }
-    
-        Mail::send('layouts.email', [
-            'content' => $this->mapParams($mail->content, $mail->params),
+        Mail::send('emailtemplate::layouts.email', [
+            'body' => $this->getBody(),
         ], function ($message) use ($mail) {
             $message->to([$mail->email])
-                ->subject($this->mapParams($mail->subject, $mail->params));
+                ->subject($this->getSubject());
         });
     
         if (Mail::failures()) {
@@ -47,6 +43,7 @@ class SendEmailService
             return false;
         }
     
+        $this->updateStatus('success');
         return true;
         
         /*}
@@ -62,7 +59,31 @@ class SendEmailService
         
     }
     
-    protected function updateStatus($status, array $error = [])
+    protected function getSubject()
+    {
+        if (@$this->mail->data['subject']) {
+            $subject = $this->mail->data['subject'];
+        }
+        else {
+            $subject = $this->mail->template->subject;
+        }
+        
+        return $this->mapParams($subject);
+    }
+    
+    protected function getBody()
+    {
+        if (@$this->mail->data['body']) {
+            $body = $this->mail->data['body'];
+        }
+        else {
+            $body = $this->mail->template->body;
+        }
+    
+        return $this->mapParams($body);
+    }
+    
+    protected function updateStatus(string $status)
     {
         return $this->mail->update([
             'status' => $status,
@@ -77,14 +98,13 @@ class SendEmailService
         ]);
     }
     
-    protected function mapParams($content, $params)
+    protected function mapParams($string)
     {
-        $params = json_decode($params);
-        foreach ($params as $key => $param) {
-            $content = str_replace('{'. $key .'}', $param, $content);
+        foreach ($this->mail->params as $key => $param) {
+            $string = str_replace('{'. $key .'}', $param, $string);
         }
         
-        return $content;
+        return $string;
     }
     
     protected function validate()
