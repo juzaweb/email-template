@@ -41,7 +41,7 @@ EmailTemplate::create([
 
 ### Send email with template
 ```
-EmailService::withTemplate('code')
+EmailService::withTemplate('test_mail')
     ->setEmails('test@example.com')
     ->setParams([
         'name' => 'The Anh',
