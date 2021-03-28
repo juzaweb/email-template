@@ -28,6 +28,8 @@ View more: [Starting The Scheduler](https://laravel.com/docs/6.x/scheduling#intr
 ## Usage
 ### Make Email Template
 ```
+use Theanh\EmailTemplate\Models\EmailTemplate;
+
 EmailTemplate::create([
     'code' => 'test_mail',
     'subject' => 'Send email test for {name}',
@@ -41,6 +43,8 @@ EmailTemplate::create([
 
 ### Send email with template
 ```
+use Theanh\EmailTemplate\Facades\EmailService;
+
 EmailService::withTemplate('test_mail')
     ->setEmails('test@example.com')
     ->setParams([

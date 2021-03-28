@@ -27,36 +27,34 @@ class SendEmailService
         
         $this->updateStatus('processing');
     
-        //try {
+        try {
+            Mail::send('emailtemplate::layouts.email', [
+                'body' => $this->getBody(),
+            ], function ($message) use ($mail) {
+                $message->to([$mail->email])
+                    ->subject($this->getSubject());
+            });
         
-        Mail::send('emailtemplate::layouts.email', [
-            'body' => $this->getBody(),
-        ], function ($message) use ($mail) {
-            $message->to([$mail->email])
-                ->subject($this->getSubject());
-        });
+            if (Mail::failures()) {
+                $this->updateError(array_merge([
+                    'title' => 'Mail failures',
+                ], Mail::failures()));
+                return false;
+            }
+        
+            $this->updateStatus('success');
+            return true;
+        }
+        catch (\Exception $exception) {
+            $this->updateError([
+                'title' => 'Send mail exception',
+                'message' => $exception->getMessage(),
+                'code' => $exception->getCode(),
+                'line' => $exception->getLine(),
+            ]);
     
-        if (Mail::failures()) {
-            $this->updateError(array_merge([
-                'title' => 'Mail failures',
-            ], Mail::failures()));
             return false;
         }
-    
-        $this->updateStatus('success');
-        return true;
-        
-        /*}
-            catch (\Exception $exception) {
-                return [
-                        'title' => 'Send mail exception',
-                        'message' => $exception->getMessage(),
-                        'code' => $exception->getCode(),
-                        'line' => $exception->getLine(),
-                    ];
-            }*/
-    
-        
     }
     
     protected function getSubject()
