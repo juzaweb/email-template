@@ -1,9 +1,10 @@
 {
     "name": "theanh/laravel-email-template",
-    "description": "Laravel email template",
+    "description": "Add and manager email template for Laravel",
     "keywords": [
         "laravel email template",
-        "email template for laravel"
+        "email template for laravel",
+        "manager email template"
     ],
     "license": "MIT",
     "authors": [
