@@ -11,7 +11,15 @@ class EmailList extends Model
         'template_id',
         'email',
         'priority',
-        'params'
+        'params',
+        'status',
+        'error',
+        'data',
+    ];
+    
+    protected $casts = [
+        'params' => 'array',
+        'data' => 'array',
     ];
     
     public function template()

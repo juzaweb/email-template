@@ -12,7 +12,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->bigIncrements('id');
             $table->string('code', 50)->unique();
             $table->string('subject', 250);
-            $table->text('content');
+            $table->text('body');
             $table->text('params')->nullable();
             $table->timestamps();
         });

@@ -9,13 +9,11 @@ class EmailTemplate extends Model
     protected $table = 'email_template';
     protected $fillable = [
         'subject',
-        'content',
+        'body',
         'params'
     ];
     
     protected $casts = [
         'params' => 'array'
     ];
-    
-    
 }
