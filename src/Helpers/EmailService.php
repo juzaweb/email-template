@@ -5,7 +5,7 @@ namespace Theanh\EmailTemplate\Helpers;
 use Theanh\EmailTemplate\Models\EmailList;
 use Theanh\EmailTemplate\Models\EmailTemplate;
 
-class SendEmail
+class EmailService
 {
     protected $emails;
     protected $template;
@@ -18,16 +18,20 @@ class SendEmail
      * Set template for email by template code
      *
      * @param string $templateCode
+     * @return $this
      * */
     public function withTemplate(string $templateCode)
     {
         $this->template = $templateCode;
+        
+        return $this;
     }
     
     /**
      * Set emails will send
      *
      * @param string|array $emails
+     * @return $this
      * */
     public function setEmails($emails)
     {
@@ -36,31 +40,42 @@ class SendEmail
         }
         
         $this->emails = [$emails];
+    
+        return $this;
     }
     
     /**
      * Set params for email
      *
      * @param array $params
+     * @return $this
      * */
     public function setParams(array $params)
     {
         $this->params = $params;
+    
+        return $this;
     }
     
     public function setPriority(int $priority)
     {
         $this->priority = $priority;
+    
+        return $this;
     }
     
     public function setSubject($subject)
     {
         $this->subject = $subject;
+    
+        return $this;
     }
     
     public function setBody($body)
     {
         $this->body = $body;
+    
+        return $this;
     }
     
     public function send()

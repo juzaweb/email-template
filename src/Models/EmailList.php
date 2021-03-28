@@ -20,6 +20,7 @@ class EmailList extends Model
     protected $casts = [
         'params' => 'array',
         'data' => 'array',
+        'error' => 'array',
     ];
     
     public function template()
