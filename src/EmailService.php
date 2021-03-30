@@ -1,6 +1,6 @@
 <?php
 
-namespace Theanh\EmailTemplate\Helpers;
+namespace Theanh\EmailTemplate;
 
 use Theanh\EmailTemplate\Models\EmailList;
 use Theanh\EmailTemplate\Models\EmailTemplate;
@@ -13,6 +13,14 @@ class EmailService
     protected $priority = 1;
     protected $subject;
     protected $body;
+    
+    /**
+     * Make email service
+     * */
+    public static function make()
+    {
+        return new EmailService();
+    }
     
     /**
      * Set template for email by template code

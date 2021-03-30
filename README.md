@@ -43,9 +43,10 @@ EmailTemplate::create([
 
 ### Send email with template
 ```
-use Theanh\EmailTemplate\Facades\EmailService;
+use Theanh\EmailTemplate\EmailService;
 
-EmailService::withTemplate('test_mail')
+EmailService::make()
+    ->withTemplate('test_mail')
     ->setEmails('test@example.com')
     ->setParams([
         'name' => 'The Anh',
