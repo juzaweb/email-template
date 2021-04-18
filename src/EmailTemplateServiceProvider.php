@@ -5,13 +5,15 @@ namespace Theanh\EmailTemplate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Theanh\EmailTemplate\Commands\SendMailCommand;
-use Theanh\EmailTemplate\Contracts\SendEmailServiceContract;
-use Theanh\EmailTemplate\Helpers\SendEmailService;
 
 class EmailTemplateServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/../config/email-template.php' => config_path('email-template.php'),
+        ], 'config');
+
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
     
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'emailtemplate');
@@ -24,10 +26,11 @@ class EmailTemplateServiceProvider extends ServiceProvider
     
     public function register()
     {
-        $this->app->singleton(SendEmailServiceContract::class, function () {
-            return new SendEmailService();
-        });
-    
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/email-template.php',
+            'email-template'
+        );
+
         $this->commands([
             SendMailCommand::class,
         ]);
