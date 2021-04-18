@@ -2,6 +2,7 @@
 
 namespace Theanh\EmailTemplate;
 
+use Theanh\EmailTemplate\Jobs\SendEmail;
 use Theanh\EmailTemplate\Models\EmailList;
 use Theanh\EmailTemplate\Models\EmailTemplate;
 
@@ -45,9 +46,9 @@ class EmailService
     {
         if (is_array($emails)) {
             $this->emails = array_unique($emails);
+        } else {
+            $this->emails = [$emails];
         }
-        
-        $this->emails = [$emails];
     
         return $this;
     }
@@ -100,13 +101,23 @@ class EmailService
         }
         
         foreach ($this->emails as $email) {
-            EmailList::create([
+            $emailList = EmailList::create([
                 'email' => $email,
                 'template_id' => $templateId,
                 'params' => $this->params,
                 'priority' => $this->priority,
                 'data' => $data,
             ]);
+
+            $method = config('email-template.method');
+            switch ($method) {
+                case 'sync':
+                    (new SendEmailService($emailList))->send();
+                    break;
+                case 'queue':
+                    SendEmail::dispatch($emailList);
+                    break;
+            }
         }
     }
     

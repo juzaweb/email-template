@@ -2,9 +2,9 @@
 
 namespace Theanh\EmailTemplate\Commands;
 
-use Theanh\EmailTemplate\Facades\SendEmailService;
 use Theanh\EmailTemplate\Models\EmailList;
 use Illuminate\Console\Command;
+use Theanh\EmailTemplate\SendEmailService;
 
 class SendMailCommand extends Command
 {
@@ -19,6 +19,10 @@ class SendMailCommand extends Command
      * */
     public function handle()
     {
+        if (config('email-template.method') != 'cron') {
+            return;
+        }
+
         $limit = 10;
         $send = 0;
         
@@ -32,10 +36,9 @@ class SendMailCommand extends Command
                 return;
             }
             
-            if (SendEmailService::send($mail)) {
+            if ((new SendEmailService($mail))->send()) {
                 $this->info('Send mail successful: ' . $mail->id);
-            }
-            else {
+            } else {
                 $this->error('Send mail error: ' . $mail->id);
             }
             

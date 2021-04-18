@@ -1,6 +1,6 @@
 <?php
 
-namespace Theanh\EmailTemplate\Helpers;
+namespace Theanh\EmailTemplate;
 
 use Theanh\EmailTemplate\Models\EmailList;
 use Illuminate\Support\Facades\Mail;
@@ -8,17 +8,19 @@ use Illuminate\Support\Facades\Mail;
 class SendEmailService
 {
     protected $mail;
-    
+
+    public function __construct(EmailList $mail)
+    {
+        $this->mail = $mail;
+    }
+
     /**
      * Send email by row email_lists table
      *
-     * @param EmailList $mail
      * @return bool
      * */
-    public function send(EmailList $mail)
+    public function send()
     {
-        $this->mail = $mail;
-        
         $validate = $this->validate();
         if ($validate !== true) {
             $this->updateError($validate);
@@ -30,8 +32,8 @@ class SendEmailService
         try {
             Mail::send('emailtemplate::layouts.email', [
                 'body' => $this->getBody(),
-            ], function ($message) use ($mail) {
-                $message->to([$mail->email])
+            ], function ($message) {
+                $message->to([$this->mail->email])
                     ->subject($this->getSubject());
             });
         
@@ -44,8 +46,7 @@ class SendEmailService
         
             $this->updateStatus('success');
             return true;
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->updateError([
                 'title' => 'Send mail exception',
                 'message' => $exception->getMessage(),
@@ -61,8 +62,7 @@ class SendEmailService
     {
         if (@$this->mail->data['subject']) {
             $subject = $this->mail->data['subject'];
-        }
-        else {
+        } else {
             $subject = $this->mail->template->subject;
         }
         
@@ -73,8 +73,7 @@ class SendEmailService
     {
         if (@$this->mail->data['body']) {
             $body = $this->mail->data['body'];
-        }
-        else {
+        } else {
             $body = $this->mail->template->body;
         }
     
