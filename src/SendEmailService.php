@@ -1,8 +1,8 @@
 <?php
 
-namespace Theanh\EmailTemplate;
+namespace Tadcms\EmailTemplate;
 
-use Theanh\EmailTemplate\Models\EmailList;
+use Tadcms\EmailTemplate\Models\EmailList;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailService

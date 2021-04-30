@@ -1,10 +1,10 @@
 <?php
 
-namespace Theanh\EmailTemplate;
+namespace Tadcms\EmailTemplate;
 
-use Theanh\EmailTemplate\Jobs\SendEmail;
-use Theanh\EmailTemplate\Models\EmailList;
-use Theanh\EmailTemplate\Models\EmailTemplate;
+use Tadcms\EmailTemplate\Jobs\SendEmail;
+use Tadcms\EmailTemplate\Models\EmailList;
+use Tadcms\EmailTemplate\Models\EmailTemplate;
 
 class EmailService
 {

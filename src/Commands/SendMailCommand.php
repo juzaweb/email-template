@@ -1,10 +1,10 @@
 <?php
 
-namespace Theanh\EmailTemplate\Commands;
+namespace Tadcms\EmailTemplate\Commands;
 
-use Theanh\EmailTemplate\Models\EmailList;
+use Tadcms\EmailTemplate\Models\EmailList;
 use Illuminate\Console\Command;
-use Theanh\EmailTemplate\SendEmailService;
+use Tadcms\EmailTemplate\SendEmailService;
 
 class SendMailCommand extends Command
 {

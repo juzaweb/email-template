@@ -1,10 +1,10 @@
 <?php
 
-namespace Theanh\EmailTemplate;
+namespace Tadcms\EmailTemplate;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
-use Theanh\EmailTemplate\Commands\SendMailCommand;
+use Tadcms\EmailTemplate\Commands\SendMailCommand;
 
 class EmailTemplateServiceProvider extends ServiceProvider
 {

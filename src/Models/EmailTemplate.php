@@ -1,6 +1,6 @@
 <?php
 
-namespace Theanh\EmailTemplate\Models;
+namespace Tadcms\EmailTemplate\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

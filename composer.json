@@ -1,5 +1,6 @@
 {
-    "name": "theanh/laravel-email-template",
+    "name": "tadcms/email-template",
+    "version": "1.0.1",
     "description": "Add and manager email template for Laravel",
     "keywords": [
         "laravel email template",
@@ -11,8 +12,7 @@
         {
             "name": "The Anh Dang",
             "email": "dangtheanh16@gmail.com",
-            "role": "Developer",
-            "homepage": "https://fb.com/TheAnhDang.1996"
+            "role": "Developer"
         }
     ],
     "require": {
@@ -24,13 +24,13 @@
     },
     "autoload": {
         "psr-4": {
-          "Theanh\\EmailTemplate\\": "src/"
+          "Tadcms\\EmailTemplate\\": "src/"
         }
     },
     "extra": {
       "laravel": {
         "providers": [
-          "Theanh\\EmailTemplate\\EmailTemplateServiceProvider"
+          "Tadcms\\EmailTemplate\\EmailTemplateServiceProvider"
         ]
       }
     }

@@ -10,7 +10,7 @@ Add and manager email template for Laravel
 ## Install
 - Install package
 ```
-composer require theanh/laravel-email-template
+composer require tadcms/laravel-email-template
 ```
 
 - Migration
@@ -28,7 +28,7 @@ View more: [Starting The Scheduler](https://laravel.com/docs/6.x/scheduling#intr
 ## Usage
 ### Make Email Template
 ```
-use Theanh\EmailTemplate\Models\EmailTemplate;
+use Tadcms\EmailTemplate\Models\EmailTemplate;
 
 EmailTemplate::create([
     'code' => 'test_mail',
@@ -43,7 +43,7 @@ EmailTemplate::create([
 
 ### Send email with template
 ```
-use Theanh\EmailTemplate\EmailService;
+use Tadcms\EmailTemplate\EmailService;
 
 EmailService::make()
     ->withTemplate('test_mail')

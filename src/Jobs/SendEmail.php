@@ -1,14 +1,14 @@
 <?php
 
-namespace Theanh\EmailTemplate\Jobs;
+namespace Tadcms\EmailTemplate\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Theanh\EmailTemplate\Models\EmailList;
-use Theanh\EmailTemplate\SendEmailService;
+use Tadcms\EmailTemplate\Models\EmailList;
+use Tadcms\EmailTemplate\SendEmailService;
 
 class SendEmail implements ShouldQueue
 {
